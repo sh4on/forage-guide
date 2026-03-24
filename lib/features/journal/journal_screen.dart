@@ -107,6 +107,7 @@ class _JournalScreenState extends State<JournalScreen> {
       backgroundColor: AppTheme.cream,
       appBar: AppBar(
         title: const Text('My Finds'),
+        automaticallyImplyLeading: false,
         actions: [
           if (_entries.isNotEmpty)
             PopupMenuButton<String>(

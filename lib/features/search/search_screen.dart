@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forage_guide/features/search/search_controller.dart';
+import 'package:forage_guide/widgets/exit_alert_dialog.dart';
 import '../../data/local/database_helper.dart';
 import '../../data/models/species.dart';
 import '../../widgets/species_card.dart';
@@ -34,6 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ForageGuide'),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),

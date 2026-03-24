@@ -155,6 +155,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
       backgroundColor: AppTheme.cream,
       appBar: AppBar(
         title: const Text('Nearby Species'),
+        automaticallyImplyLeading: false,
         actions: [
           // Toggle map / list view
           // IconButton(
