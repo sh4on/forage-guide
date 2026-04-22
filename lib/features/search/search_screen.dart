@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forage_guide/features/search/search_controller.dart';
 import 'package:forage_guide/widgets/exit_alert_dialog.dart';
+import 'package:upgrader/upgrader.dart';
 import '../../data/local/database_helper.dart';
 import '../../data/models/species.dart';
 import '../../widgets/species_card.dart';
@@ -32,68 +33,73 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ForageGuide'),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => _showSafetyDialog(context),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              controller: _textCtrl,
-              onChanged: (v) {
-                if (v.length >= 2) _controller.search(v);
-                if (v.isEmpty) _controller.clear();
-              },
-              decoration: InputDecoration(
-                hintText: 'Search mushrooms, plants...',
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: AppTheme.forestGreen,
+    return UpgradeAlert(
+      showIgnore: false,
+      showLater: false,
+      barrierDismissible: false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('ForageGuide'),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () => _showSafetyDialog(context),
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                controller: _textCtrl,
+                onChanged: (v) {
+                  if (v.length >= 2) _controller.search(v);
+                  if (v.isEmpty) _controller.clear();
+                },
+                decoration: InputDecoration(
+                  hintText: 'Search mushrooms, plants...',
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: AppTheme.forestGreen,
+                  ),
+                  suffixIcon: _textCtrl.text.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _textCtrl.clear();
+                            _controller.clear();
+                            setState(() {});
+                          },
+                        )
+                      : null,
                 ),
-                suffixIcon: _textCtrl.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _textCtrl.clear();
-                          _controller.clear();
-                          setState(() {});
-                        },
-                      )
-                    : null,
               ),
             ),
-          ),
-          Expanded(
-            child: AnimatedBuilder(
-              animation: _controller,
-              builder: (_, __) {
-                if (_controller.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: AppTheme.forestGreen,
-                    ),
-                  );
-                }
-                if (_controller.error != null) {
-                  return _buildError();
-                }
-                if (_controller.results.isNotEmpty) {
-                  return _buildResults();
-                }
-                return _buildWelcome();
-              },
+            Expanded(
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (_, __) {
+                  if (_controller.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppTheme.forestGreen,
+                      ),
+                    );
+                  }
+                  if (_controller.error != null) {
+                    return _buildError();
+                  }
+                  if (_controller.results.isNotEmpty) {
+                    return _buildResults();
+                  }
+                  return _buildWelcome();
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
