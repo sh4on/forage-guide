@@ -6,7 +6,6 @@ import '../../data/api/inaturalist_api.dart';
 import '../../data/local/database_helper.dart';
 import '../../data/models/species.dart';
 import '../../widgets/species_card.dart';
-import '../../widgets/safety_badge.dart';
 
 class NearbyScreen extends StatefulWidget {
   const NearbyScreen({super.key});
@@ -28,7 +27,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
   bool _loadingSpecies = false;
   String? _error;
   int _radiusKm = 10;
-  NearbyViewMode _viewMode = NearbyViewMode.list;
+  final NearbyViewMode _viewMode = NearbyViewMode.list;
 
   // Filters
   String _filterType = 'All'; // 'All' | 'Fungi' | 'Plantae'

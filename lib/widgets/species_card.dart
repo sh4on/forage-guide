@@ -6,6 +6,7 @@ import 'safety_badge.dart';
 class SpeciesCard extends StatelessWidget {
   final Species species;
   final VoidCallback onTap;
+
   const SpeciesCard({super.key, required this.species, required this.onTap});
 
   @override
@@ -21,6 +22,8 @@ class SpeciesCard extends StatelessWidget {
               height: 90,
               child: species.photoUrl != null
                   ? CachedNetworkImage(
+                      memCacheHeight: 180,
+                      memCacheWidth: 180,
                       imageUrl: species.photoUrl!,
                       fit: BoxFit.cover,
                       placeholder: (_, __) => Container(

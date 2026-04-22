@@ -7,6 +7,7 @@ import '../../core/theme.dart';
 
 class SpeciesDetailScreen extends StatelessWidget {
   final Species species;
+
   const SpeciesDetailScreen({super.key, required this.species});
 
   Future<void> _launchUrl(String url) async {
@@ -58,6 +59,8 @@ class SpeciesDetailScreen extends StatelessWidget {
           children: [
             species.photoUrl != null
                 ? CachedNetworkImage(
+                    memCacheWidth: MediaQuery.sizeOf(context).width.toInt(),
+                    memCacheHeight: 300,
                     imageUrl: species.photoUrl!,
                     fit: BoxFit.cover,
                     placeholder: (_, __) => Container(
