@@ -20,7 +20,7 @@ class ForageGuideApp extends StatelessWidget {
       title: 'ForageGuide',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      darkTheme: AppTheme.light,
       themeMode: ThemeMode.system,
       initialRoute: seenDisclaimer ? '/home' : '/disclaimer',
       routes: AppRouter.routes,
